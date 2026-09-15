@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>استيراد بيانات أولية — نظام إدارة الإنتاج</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <main class="main">
+      <div class="topbar">
+        <h1>استيراد بيانات أولية وإدارة المستخدمين</h1>
+        <div class="meta">استخدمها مرة واحدة بس عشان تحمّل بيانات الأصناف والعائلات الأولية</div>
+      </div>
+
+      <div id="msgBox"></div>
+
+      <div class="panel">
+        <h2>استيراد البيانات الأولية <span>53 صنف + 6 عائلات، من ملفات المصنع الأصلية</span></h2>
+        <p style="color:var(--text-dim); font-size:13px; margin-bottom:14px;">
+          دوس الزرار مرة واحدة بس أول ما تعمل الموقع. لو دوسته تاني هيستبدل بيانات الأصناف والعائلات الموجودة بنفس الأكواد.
+        </p>
+        <button class="btn" id="seedBtn">استيراد الأصناف والعائلات</button>
+        <span id="seedStatus" style="margin-inline-start:12px; color:var(--text-dim); font-size:13px;"></span>
+      </div>
+
+      <div class="panel">
+        <h2>استيراد أوزان الأصناف <span>من شيت "weights" — لحساب الطن والإنتاجية كجم/ساعة</span></h2>
+        <p style="color:var(--text-dim); font-size:13px; margin-bottom:14px;">
+          دوس الزرار عشان يحدّث وزن كل صنف (كجم) تلقائيًا. آمن تدوسه أكتر من مرة، هيحدّث الأرقام بس مش هيكرر حاجة.
+        </p>
+        <button class="btn" id="seedWeightsBtn">استيراد الأوزان</button>
+        <span id="weightsStatus" style="margin-inline-start:12px; color:var(--text-dim); font-size:13px;"></span>
+      </div>
+
+      <div class="panel">
+        <h2>إضافة صلاحية مستخدم</h2>
+        <p style="color:var(--text-dim); font-size:13px; margin-bottom:14px;">
+          الأول اعمل حساب المستخدم من Firebase Console (Authentication > Add user)، بعدين هات الـ UID بتاعه من هناك وحطه هنا مع دوره.
+        </p>
+        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:10px; align-items:end;">
+          <div class="field" style="margin-bottom:0;"><label>UID</label><input id="uidInput"></div>
+          <div class="field" style="margin-bottom:0;"><label>الاسم</label><input id="nameInput"></div>
+          <div class="field" style="margin-bottom:0;">
+            <label>الدور</label>
+            <select id="roleInput">
+              <option value="admin">admin — مدير المصنع (صلاحية كاملة)</option>
+              <option value="management">management — إدارة عليا (تحليل وعرض فقط)</option>
+              <option value="supervisor">supervisor — مشرف (تسجيل أعطال)</option>
+              <option value="operator">operator — عامل إدخال (تسجيل إنتاج)</option>
+            </select>
+          </div>
+          <button class="btn" id="addUserBtn">حفظ</button>
+        </div>
+      </div>
+    </main>
+    <nav class="sidebar" id="sidebar"></nav>
+  </div>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

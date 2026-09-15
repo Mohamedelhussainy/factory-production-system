@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الخطة الشهرية — نظام إدارة الإنتاج</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <main class="main">
+      <div class="topbar">
+        <h1>الخطة الشهرية</h1>
+        <div class="meta">كل الأصناف مجمّعة حسب العيلة، بالكمية الشهرية والأسبوعية</div>
+      </div>
+
+      <div class="panel">
+        <table>
+          <thead><tr><th>العيلة</th><th>الكود</th><th>الوصف</th><th>إجمالي الخطة الشهرية</th><th>أسبوع 1</th><th>أسبوع 2</th><th>أسبوع 3</th><th>أسبوع 4</th></tr></thead>
+          <tbody id="monthlyBody"><tr><td colspan="8" class="empty">جارِ التحميل...</td></tr></tbody>
+        </table>
+      </div>
+    </main>
+    <nav class="sidebar" id="sidebar"></nav>
+  </div>
+
+  <script type="module" src="js/monthly-plan.js"></script>
+</body>
+</html>

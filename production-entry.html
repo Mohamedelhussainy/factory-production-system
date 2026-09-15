@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إدخال الإنتاج — نظام إدارة الإنتاج</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <main class="main">
+      <div class="topbar">
+        <h1>تسجيل الإنتاج الفعلي</h1>
+        <div class="meta">سجّل الكمية المنتجة لكل صنف/ماكينة في الوردية</div>
+      </div>
+
+      <div id="msgBox"></div>
+
+      <div class="panel">
+        <h2>تسجيل جديد</h2>
+        <form id="entryForm">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
+            <div class="field">
+              <label>التاريخ</label>
+              <input type="date" id="entryDate" required>
+            </div>
+            <div class="field">
+              <label>الوردية</label>
+              <select id="entryShift" required>
+                <option value="1">وردية 1</option>
+                <option value="2">وردية 2</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>الصنف</label>
+              <select id="entryItem" required></select>
+            </div>
+            <div class="field">
+              <label>اسم الماكينة / رقمها</label>
+              <input type="text" id="entryMachine" placeholder="مثال: منشار 1" required>
+            </div>
+            <div class="field">
+              <label>اسم العامل</label>
+              <input type="text" id="entryWorker" placeholder="اسم العامل على الماكينة" required>
+            </div>
+            <div class="field">
+              <label>الكمية المنتجة فعليًا</label>
+              <input type="number" id="entryQty" min="0" required>
+            </div>
+          </div>
+          <button class="btn" type="submit">حفظ التسجيل</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>آخر التسجيلات اليوم</h2>
+        <table>
+          <thead><tr><th>الوقت</th><th>الوردية</th><th>الصنف</th><th>الماكينة</th><th>العامل</th><th>الكمية</th></tr></thead>
+          <tbody id="entriesBody"><tr><td colspan="6" class="empty">جارِ التحميل...</td></tr></tbody>
+        </table>
+      </div>
+    </main>
+    <nav class="sidebar" id="sidebar"></nav>
+  </div>
+
+  <script type="module" src="js/production-entry.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الأعطال — نظام إدارة الإنتاج</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <main class="main">
+      <div class="topbar">
+        <h1>تسجيل الأعطال والتوقفات</h1>
+        <div class="meta">فتح عطل جديد أو تسجيل وقت توقف وسببه</div>
+      </div>
+
+      <div id="msgBox"></div>
+
+      <div class="panel">
+        <h2>فتح عطل / تسجيل توقف</h2>
+        <form id="downtimeForm">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
+            <div class="field">
+              <label>التاريخ</label>
+              <input type="date" id="dtDate" required>
+            </div>
+            <div class="field">
+              <label>العيلة / الخط</label>
+              <select id="dtFamily" required></select>
+            </div>
+            <div class="field">
+              <label>اسم الماكينة / رقمها</label>
+              <input type="text" id="dtMachine" placeholder="مثال: لحام أوتوماتيك 2" required>
+            </div>
+            <div class="field">
+              <label>سبب التوقف</label>
+              <select id="dtReason" required>
+                <option value="maintenance">صيانة</option>
+                <option value="material">نقص خامة</option>
+                <option value="labor">نقص عمالة</option>
+                <option value="other">أخرى</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>وقت بداية التوقف</label>
+              <input type="time" id="dtStart" required>
+            </div>
+            <div class="field">
+              <label>وقت نهاية التوقف (اتركه فاضي لو العطل لسه مستمر)</label>
+              <input type="time" id="dtEnd">
+            </div>
+          </div>
+          <div class="field">
+            <label>ملاحظات</label>
+            <textarea id="dtNotes" rows="2" placeholder="تفاصيل إضافية عن العطل"></textarea>
+          </div>
+          <button class="btn" type="submit">حفظ التسجيل</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>الأعطال المسجلة اليوم</h2>
+        <table>
+          <thead><tr><th>العيلة</th><th>الماكينة</th><th>السبب</th><th>من</th><th>إلى</th><th>مدة (دقيقة)</th></tr></thead>
+          <tbody id="downtimeBody"><tr><td colspan="6" class="empty">جارِ التحميل...</td></tr></tbody>
+        </table>
+      </div>
+    </main>
+    <nav class="sidebar" id="sidebar"></nav>
+  </div>
+
+  <script type="module" src="js/downtime.js"></script>
+</body>
+</html>

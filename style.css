@@ -1,0 +1,186 @@
+/* =========================================================
+   نظام إدارة الإنتاج — التصميم العام
+   هوية بصرية: غرفة تحكم مصنع — رمادي فولاذي + كهرماني تنبيه
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --bg:            #14181d;
+  --panel:         #1c2229;
+  --panel-raised:  #232a32;
+  --line:          #313a44;
+  --text:          #e7ebee;
+  --text-dim:      #94a1ad;
+  --steel:         #4f8fae;
+  --steel-dim:     #2c5266;
+  --amber:         #e8a33d;
+  --good:          #4c9a6a;
+  --bad:           #d1574b;
+  --radius: 10px;
+  --font-ui: 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-num: 'IBM Plex Mono', monospace;
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  margin:0; padding:0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  direction: rtl;
+  min-height: 100vh;
+}
+
+a{ color: inherit; text-decoration: none; }
+
+/* ---------- Layout shell ---------- */
+.shell{
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  min-height: 100vh;
+}
+@media (max-width: 860px){
+  .shell{ grid-template-columns: 1fr; }
+  .sidebar{ order: 2; }
+}
+
+.sidebar{
+  background: var(--panel);
+  border-left: 1px solid var(--line);
+  padding: 22px 18px;
+  display:flex; flex-direction:column; gap:6px;
+}
+.sidebar .brand{
+  font-weight:700; font-size:17px; margin-bottom: 18px; color: var(--text);
+  line-height:1.4;
+}
+.sidebar .brand small{
+  display:block; font-size:11px; color: var(--text-dim); font-weight:400; margin-top:2px;
+}
+.nav-link{
+  display:flex; align-items:center; gap:10px;
+  padding: 10px 12px; border-radius: 8px;
+  color: var(--text-dim); font-size:14px; font-weight:500;
+  border: 1px solid transparent;
+}
+.nav-link:hover{ background: var(--panel-raised); color: var(--text); }
+.nav-link.active{ background: var(--steel-dim); color: #fff; border-color: var(--steel); }
+.nav-lock{ margin-inline-start:auto; font-size:11px; color: var(--text-dim); }
+
+.sidebar .auth-box{
+  margin-top:auto; padding-top:16px; border-top:1px solid var(--line);
+  font-size:13px; color: var(--text-dim);
+}
+.sidebar .auth-box .who{ color: var(--text); font-weight:600; margin-bottom:8px; }
+.role-badge{
+  display:inline-block; padding:2px 9px; border-radius:20px;
+  font-size:11px; font-weight:600; background: var(--steel-dim); color:#dff0f8;
+  margin-inline-start:6px;
+}
+
+.main{ padding: 26px 30px; }
+.topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom: 24px; flex-wrap: wrap; gap:12px;
+}
+.topbar h1{ font-size:20px; margin:0; font-weight:700; }
+.topbar .meta{ color: var(--text-dim); font-size:13px; }
+
+/* ---------- Cards / KPIs ---------- */
+.kpi-row{
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+  gap:14px; margin-bottom: 26px;
+}
+.kpi{
+  background: var(--panel); border:1px solid var(--line); border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.kpi .label{ font-size:12px; color: var(--text-dim); margin-bottom:8px; }
+.kpi .value{ font-family: var(--font-num); font-size:28px; font-weight:600; color:#fff; }
+.kpi .value.amber{ color: var(--amber); }
+.kpi .value.good{ color: var(--good); }
+.kpi .value.bad{ color: var(--bad); }
+.kpi .sub{ font-size:11px; color: var(--text-dim); margin-top:4px; }
+
+.panel{
+  background: var(--panel); border:1px solid var(--line); border-radius: var(--radius);
+  padding: 18px 20px; margin-bottom:20px;
+}
+.panel h2{ font-size:15px; margin:0 0 14px; font-weight:700; }
+.panel h2 span{ color: var(--text-dim); font-weight:400; font-size:12px; }
+
+/* ---------- Tables ---------- */
+table{ width:100%; border-collapse: collapse; font-size:13px; }
+th, td{ padding: 9px 10px; text-align:right; border-bottom:1px solid var(--line); }
+th{ color: var(--text-dim); font-weight:600; font-size:12px; }
+td.num{ font-family: var(--font-num); }
+tr:hover td{ background: rgba(255,255,255,0.02); }
+
+/* ---------- Forms ---------- */
+label{ font-size:13px; color: var(--text-dim); display:block; margin-bottom:6px; }
+input, select, button, textarea{
+  font-family: inherit; font-size:14px;
+}
+input, select, textarea{
+  width:100%; padding:9px 11px; background: var(--panel-raised);
+  border:1px solid var(--line); border-radius:7px; color: var(--text);
+}
+input:focus, select:focus, textarea:focus{ outline:2px solid var(--steel); border-color: var(--steel); }
+.field{ margin-bottom:14px; }
+.btn{
+  display:inline-block; padding:10px 18px; border-radius:7px; border:none;
+  background: var(--steel); color:#fff; font-weight:600; cursor:pointer;
+}
+.btn:hover{ background: var(--steel-dim); }
+.btn.secondary{ background: var(--panel-raised); border:1px solid var(--line); color: var(--text); }
+.btn.danger{ background: var(--bad); }
+.btn:disabled{ opacity:.5; cursor:not-allowed; }
+
+.msg{ padding:10px 14px; border-radius:8px; font-size:13px; margin-bottom:14px; }
+.msg.error{ background: rgba(209,87,75,.15); color:#f3a79e; border:1px solid rgba(209,87,75,.4); }
+.msg.ok{ background: rgba(76,154,106,.15); color:#a4dcb8; border:1px solid rgba(76,154,106,.4); }
+
+.center-card{
+  max-width: 380px; margin: 10vh auto; background: var(--panel);
+  border:1px solid var(--line); border-radius: var(--radius); padding: 32px;
+}
+.center-card h1{ font-size:18px; margin: 0 0 20px; }
+
+.empty{ color: var(--text-dim); font-size:13px; padding: 20px 0; text-align:center; }
+
+.tag{ display:inline-block; padding:2px 8px; border-radius:5px; font-size:11px; background: var(--panel-raised); color: var(--text-dim); }
+
+/* ---------- Home launcher page ---------- */
+.home-shell{ max-width: 920px; margin: 0 auto; padding: 28px 20px 60px; }
+.home-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 26px; }
+.home-top .icon-btn{
+  width:40px; height:40px; border-radius:50%; background: var(--panel);
+  border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+  font-size:16px; color: var(--text-dim);
+}
+.home-hero{ text-align:center; margin-bottom: 30px; }
+.home-hero .brand-tag{ font-size:12px; letter-spacing:2px; color: var(--steel); font-weight:700; text-transform:uppercase; }
+.home-hero h1{ font-size:26px; margin:8px 0 2px; font-weight:800; color:#fff; }
+.home-hero .factory-label{ font-size:14px; color: var(--text-dim); margin-bottom:14px; }
+.home-hero .greeting{ font-size:15px; color: var(--text); background: var(--panel); border:1px solid var(--line); display:inline-block; padding:8px 18px; border-radius:20px; }
+.home-hero .greeting.logged{ border-color: var(--steel); color:#dff0f8; }
+
+.app-grid{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap:14px;
+}
+@media (max-width: 640px){ .app-grid{ grid-template-columns: repeat(2, 1fr); } }
+.app-card{
+  background: var(--panel); border:1px solid var(--line); border-radius: 16px;
+  padding: 20px 14px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:10px;
+  transition: border-color .15s, transform .15s;
+}
+.app-card:hover{ border-color: var(--steel); transform: translateY(-2px); }
+.app-card .icon-circle{
+  width:54px; height:54px; border-radius:50%; background: var(--panel-raised);
+  display:flex; align-items:center; justify-content:center; font-size:24px;
+}
+.app-card .label{ font-size:13px; font-weight:600; color: var(--text); line-height:1.4; }
+.app-card.locked{ opacity:.45; }
+.app-card .lock-note{ font-size:10px; color: var(--text-dim); }

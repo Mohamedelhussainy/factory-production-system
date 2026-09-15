@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الخطة الأسبوعية — نظام إدارة الإنتاج</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <main class="main">
+      <div class="topbar">
+        <h1>الخطة الأسبوعية للأصناف</h1>
+        <div class="meta">عدّل الكميات المطلوبة لكل أسبوع، وهتتوزع تلقائيًا على الأيام في لوحة المتابعة</div>
+      </div>
+
+      <div id="msgBox"></div>
+
+      <div class="panel">
+        <h2>إضافة صنف جديد</h2>
+        <div style="display:grid; grid-template-columns: repeat(4, 1fr) auto; gap:10px; align-items:end;">
+          <div class="field" style="margin-bottom:0;"><label>الكود</label><input id="newCode"></div>
+          <div class="field" style="margin-bottom:0;"><label>الوصف</label><input id="newDesc"></div>
+          <div class="field" style="margin-bottom:0;"><label>العيلة</label><select id="newFamily"></select></div>
+          <div class="field" style="margin-bottom:0;"></div>
+          <button class="btn" id="addItemBtn">إضافة</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>الأصناف <span id="itemCount"></span></h2>
+        <table>
+          <thead><tr><th>الكود</th><th>الوصف</th><th>العيلة</th><th>أسبوع 1</th><th>أسبوع 2</th><th>أسبوع 3</th><th>أسبوع 4</th><th></th></tr></thead>
+          <tbody id="itemsBody"><tr><td colspan="8" class="empty">جارِ التحميل...</td></tr></tbody>
+        </table>
+        <div style="margin-top:16px;">
+          <button class="btn" id="saveAllBtn">حفظ كل التعديلات</button>
+        </div>
+      </div>
+    </main>
+    <nav class="sidebar" id="sidebar"></nav>
+  </div>
+
+  <script type="module" src="js/plan.js"></script>
+</body>
+</html>

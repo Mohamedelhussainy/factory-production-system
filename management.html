@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الإدارة العليا — نظام إدارة الإنتاج</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <main class="main">
+      <div class="topbar">
+        <h1>لوحة الإدارة العليا</h1>
+        <div class="meta">تحليل الأداء وأسباب التوقف</div>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-bottom:20px;">
+        <button class="btn" id="tabDaily">يومي (اليوم وأمس)</button>
+        <button class="btn secondary" id="tabWeekly">أسبوعي (آخر 4 أسابيع)</button>
+        <button class="btn secondary" id="tabMonthly">شهري (الشهر الحالي)</button>
+      </div>
+
+      <div class="kpi-row" id="kpiRow">
+        <div class="kpi"><div class="label" id="kpiActualLabel">إجمالي الإنتاج الفعلي</div><div class="value" id="kpiActual">—</div></div>
+        <div class="kpi"><div class="label" id="kpiDowntimeLabel">إجمالي دقائق التوقف</div><div class="value amber" id="kpiDowntime">—</div></div>
+        <div class="kpi"><div class="label">عدد الأعطال المسجلة</div><div class="value" id="kpiFaults">—</div></div>
+      </div>
+
+      <div class="panel">
+        <h2>معدل الإنتاج وإنتاجية العمالة <span>الوزن بالطن، والإنتاجية كجم/ساعة</span></h2>
+        <div class="kpi-row">
+          <div class="kpi"><div class="label">متوسط الوزن الفعلي/يوم</div><div class="value" id="kpiActualWeight">—</div><div class="sub">طن</div></div>
+          <div class="kpi"><div class="label">متوسط الوزن المخطط/يوم</div><div class="value" id="kpiPlannedWeight">—</div><div class="sub">طن</div></div>
+          <div class="kpi"><div class="label">متوسط الإنتاجية الفعلية</div><div class="value good" id="kpiActualProd">—</div><div class="sub">كجم/ساعة</div></div>
+          <div class="kpi">
+            <div class="label">الإنتاجية المستهدفة (قابلة للتعديل)</div>
+            <input type="number" id="targetProdInput" value="60" style="width:100px; font-family:var(--font-num); font-size:20px; background:transparent; border:none; color:#e8a33d; padding:0;">
+            <div class="sub">كجم/ساعة</div>
+          </div>
+        </div>
+        <h2 style="margin-top:8px;">معدل الإنتاج اليومي <span>الوزن الفعلي مقابل المخطط</span></h2>
+        <div id="weightChart"></div>
+        <h2 style="margin-top:20px;">اتجاه إنتاجية العمالة <span>كجم/ساعة، فعلي مقابل مستهدف</span></h2>
+        <div id="productivityChart"></div>
+      </div>
+
+      <div class="panel">
+        <h2 id="actualChartTitle">الإنتاج الفعلي</h2>
+        <div id="actualChart"></div>
+      </div>
+
+      <div class="panel">
+        <h2 id="reasonChartTitle">أسباب التوقف</h2>
+        <div id="reasonChart"></div>
+      </div>
+
+      <div class="panel">
+        <h2>تفاصيل التوقفات</h2>
+        <table>
+          <thead><tr><th>التاريخ</th><th>العيلة</th><th>الماكينة</th><th>السبب</th><th>مدة (دقيقة)</th></tr></thead>
+          <tbody id="downtimeDetailBody"><tr><td colspan="5" class="empty">جارِ التحميل...</td></tr></tbody>
+        </table>
+      </div>
+    </main>
+    <nav class="sidebar" id="sidebar"></nav>
+  </div>
+
+  <script type="module" src="js/management.js"></script>
+</body>
+</html>

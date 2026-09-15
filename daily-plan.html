@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الخطة اليومية — نظام إدارة الإنتاج</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <main class="main">
+      <div class="topbar">
+        <h1>الخطة اليومية</h1>
+        <div class="meta">اختر تاريخ لعرض خطة اليوم واحتياج الماكينات والعمالة</div>
+      </div>
+
+      <div class="panel">
+        <label>اختر التاريخ</label>
+        <input type="date" id="dailyDate" style="max-width:220px;">
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi"><div class="label">إجمالي الخطة المستهدفة</div><div class="value" id="kpiTarget">—</div><div class="sub">وحدة</div></div>
+        <div class="kpi"><div class="label">عدد الأصناف على الخط</div><div class="value" id="kpiItems">—</div><div class="sub">صنف</div></div>
+        <div class="kpi"><div class="label">يوم جمعة (احتياطي)؟</div><div class="value" id="kpiFriday">—</div></div>
+      </div>
+
+      <div class="panel">
+        <h2>الأصناف المجدولة في اليوم المختار</h2>
+        <table>
+          <thead><tr><th>الكود</th><th>الوصف</th><th>العيلة</th><th>الكمية المستهدفة</th></tr></thead>
+          <tbody id="dailyItemsBody"><tr><td colspan="4" class="empty">جارِ التحميل...</td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h2>الماكينات المطلوبة <span>مكنة-وردية لليوم المختار</span></h2>
+        <table>
+          <thead><tr><th>العيلة</th><th>الماكينة / العملية</th><th>المنتج (الصنف الأعلى كمية)</th><th>الكمية</th><th>مكنة-وردية مطلوبة</th></tr></thead>
+          <tbody id="machinesBody"><tr><td colspan="5" class="empty">جارِ التحميل...</td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="panel">
+        <h2>العمالة المطلوبة <span>حسب الفئة، لليوم المختار</span></h2>
+        <table>
+          <thead><tr><th>الفئة</th><th>عدد العمال المطلوب</th></tr></thead>
+          <tbody id="laborBody"><tr><td colspan="2" class="empty">جارِ التحميل...</td></tr></tbody>
+        </table>
+      </div>
+    </main>
+    <nav class="sidebar" id="sidebar"></nav>
+  </div>
+
+  <script type="module" src="js/daily-plan.js"></script>
+</body>
+</html>

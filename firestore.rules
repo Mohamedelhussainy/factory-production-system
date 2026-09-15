@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function myRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+    function isAdmin() {
+      return isSignedIn() && myRole() == 'admin';
+    }
+    function isOperatorOrAdmin() {
+      return isSignedIn() && (myRole() == 'admin' || myRole() == 'operator');
+    }
+    function isSupervisorOrAdmin() {
+      return isSignedIn() && (myRole() == 'admin' || myRole() == 'supervisor');
+    }
+
+    // بيانات عامة يقدر أي حد يشوفها من غير تسجيل دخول (لوحة الخطة اليومية + تحليل الإدارة العليا)
+    match /families/{familyId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /items/{itemId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // تسجيل الإنتاج الفعلي — عامل الإدخال أو الأدمن بس يعدّلوا فيه
+    match /dailyProduction/{docId} {
+      allow read: if true;
+      allow write: if isOperatorOrAdmin();
+    }
+
+    // سجل الأعطال والتوقفات — المشرف أو الأدمن بس يعدّلوا فيه
+    match /downtimeLog/{docId} {
+      allow read: if true;
+      allow write: if isSupervisorOrAdmin();
+    }
+    match /maintenanceEquipment/{docId} {
+      allow read: if true;
+      allow write: if isSupervisorOrAdmin();
+    }
+
+    // تسجيل الحضور اليومي لكل وردية — المشرف أو الأدمن بس يعدّلوا فيه
+    match /attendance/{docId} {
+      allow read: if true;
+      allow write: if isSupervisorOrAdmin();
+    }
+
+    // صلاحيات المستخدمين — كل حد يشوف صلاحيته بس، والأدمن يشوف ويعدّل الكل
+    match /users/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      allow write: if isAdmin();
+    }
+  }
+}

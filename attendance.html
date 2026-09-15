@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الحضور — نظام إدارة الإنتاج</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <main class="main">
+      <div class="topbar">
+        <h1>تسجيل الحضور</h1>
+        <div class="meta">عدد العمال الحاضرين وساعات الوردية — مرة لكل وردية</div>
+      </div>
+
+      <div id="msgBox"></div>
+
+      <div class="panel">
+        <h2>تسجيل حضور وردية</h2>
+        <form id="attForm">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
+            <div class="field">
+              <label>التاريخ</label>
+              <input type="date" id="attDate" required>
+            </div>
+            <div class="field">
+              <label>الوردية</label>
+              <select id="attShift" required>
+                <option value="1">وردية 1</option>
+                <option value="2">وردية 2</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>عدد العمال الحاضرين</label>
+              <input type="number" id="attHeadcount" min="0" required>
+            </div>
+            <div class="field">
+              <label>عدد ساعات الوردية</label>
+              <input type="number" id="attHours" min="0" step="0.5" value="8" required>
+            </div>
+          </div>
+          <button class="btn" type="submit">حفظ التسجيل</button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>حضور اليوم المختار</h2>
+        <table>
+          <thead><tr><th>الوردية</th><th>عدد العمال</th><th>ساعات الوردية</th><th>إجمالي ساعات العمل</th></tr></thead>
+          <tbody id="attBody"><tr><td colspan="4" class="empty">جارِ التحميل...</td></tr></tbody>
+        </table>
+        <div style="margin-top:14px; font-weight:600;">
+          إجمالي اليوم: <span id="attDayTotal">—</span> ساعة عمل
+          (<span id="attDayHeadcount">—</span> عامل)
+        </div>
+      </div>
+    </main>
+    <nav class="sidebar" id="sidebar"></nav>
+  </div>
+
+  <script type="module" src="js/attendance.js"></script>
+</body>
+</html>

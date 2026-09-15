@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>العائلات والعمليات — نظام إدارة الإنتاج</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <main class="main">
+      <div class="topbar">
+        <h1>العائلات والعمليات</h1>
+        <div class="meta">تعريف خطوط الإنتاج وعملياتها بالترتيب — نفس فكرة قالب الإكسل</div>
+      </div>
+
+      <div id="msgBox"></div>
+
+      <div class="panel">
+        <h2>إضافة عيلة جديدة</h2>
+        <div style="display:flex; gap:10px; align-items:flex-end;">
+          <div class="field" style="flex:1; margin-bottom:0;">
+            <label>اسم العيلة</label>
+            <input type="text" id="newFamilyName" placeholder="مثال: Connectors Cell">
+          </div>
+          <button class="btn" id="addFamilyBtn">إضافة</button>
+        </div>
+      </div>
+
+      <div id="familiesContainer">
+        <div class="empty">جارِ التحميل...</div>
+      </div>
+    </main>
+    <nav class="sidebar" id="sidebar"></nav>
+  </div>
+
+  <template id="familyCardTemplate">
+    <div class="panel family-card">
+      <h2 class="family-title"></h2>
+      <table>
+        <thead><tr><th>الترتيب</th><th>اسم العملية</th><th>عدد الماكينات</th><th>ساعات الوردية</th><th>فئة العمالة</th><th>عدد العمال للعملية</th><th></th></tr></thead>
+        <tbody class="ops-body"></tbody>
+      </table>
+      <div style="margin-top:12px; display:flex; gap:10px;">
+        <button class="btn secondary add-op-btn">+ إضافة عملية</button>
+        <button class="btn save-family-btn">حفظ التعديلات</button>
+        <button class="btn danger delete-family-btn" style="margin-inline-start:auto;">حذف العيلة</button>
+      </div>
+    </div>
+  </template>
+
+  <script type="module" src="js/families.js"></script>
+</body>
+</html>
